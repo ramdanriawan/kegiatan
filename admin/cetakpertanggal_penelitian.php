@@ -9,7 +9,7 @@ include_once("tglindo.php");
 
 $tgl=date('Y-m-d');
 $tglorder=$_POST['tanggal'];
-$sql=mysql_query("select * from kas
+$sql=mysql_query("select * from penelitian
 where tgl like '$_POST[tanggal]%' and jenis='masuk' order by kode asc") or die
 (mysql_error());
 ?>
@@ -32,7 +32,7 @@ where tgl like '$_POST[tanggal]%' and jenis='masuk' order by kode asc") or die
                         <div class="panel-body">
 						 <div class="col-lg-12">
                         	<div class="row">
-							<CenteR>Laporan Penelitian :  <?php echo TanggalIndo($_POST[tanggal]);?>
+							<CenteR>Laporan Penelitian :  <?php echo TanggalIndo($_POST["tanggal"]);?>
 							</center>
 										<br>
 										   <div class="dataTable_wrapper">

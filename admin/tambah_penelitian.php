@@ -39,7 +39,7 @@ swal('Good Job!', 'Data anda sukses tersimpan', 'success');
 						<div class="form-group">
 							<label class="control-label col-lg-4">Target Capaian Output</label>
 							<div class="col-lg-4">
-								<input type="text" name="ma" autofocus required class="form-control" />
+								<input id="realisasi_output_penelitian" type="text" name="ma" autofocus required class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">

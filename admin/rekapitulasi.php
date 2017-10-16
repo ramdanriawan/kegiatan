@@ -5,7 +5,7 @@ include_once("tglindo.php");
 #untuk paging (pembagian halamanan)
 $row = 20;
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0;
-$pageSql = "SELECT * FROM kas";
+$pageSql = "SELECT * from penelitian";
 $pageQry = mysql_query($pageSql, $server) or die ("error paging: ".mysql_error());
 $jml	 = mysql_num_rows($pageQry);
 $max	 = ceil($jml/$row);
@@ -32,7 +32,7 @@ $max	 = ceil($jml/$row);
 					</tr>
 				</thead>
 			<?php
-				$pasienSql = "SELECT * FROM kas ORDER BY kode DESC LIMIT $hal, $row";
+				$pasienSql = "SELECT * from penelitian ORDER BY kode DESC LIMIT $hal, $row";
 				$pasienQry = mysql_query($pasienSql, $server)  or die ("Query pasien salah : ".mysql_error());
 				$nomor  = 0; 
 				while ($pasien = mysql_fetch_array($pasienQry)) {

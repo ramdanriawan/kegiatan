@@ -1,6 +1,6 @@
 <?php
 	$server = mysql_connect("localhost","root","");
-	$db = mysql_select_db("kas");
+	$db = mysql_select_db("kegiatan");
 	
 	if(!$server){
 		echo "Maaf, Gagal tersambung dengan server !";

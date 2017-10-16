@@ -2,7 +2,7 @@
 include_once("../library/koneksi.php");
 if($_GET){
 	if($_GET["aksi"] && $_GET["nmr"]){
-		$del = "DELETE FROM kas WHERE kode='".$_GET["nmr"]."'";
+		$del = "DELETE from penelitian WHERE kode='".$_GET["nmr"]."'";
 		$delDb = mysql_query($del,$server) or die("Error hapus data ".mysql_error());
 		if($delDb){
 			echo "<meta http-equiv='refresh' content='0; url=?menu=pengembangan'>";

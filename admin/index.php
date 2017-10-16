@@ -55,6 +55,11 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
     <!-- END GLOBAL SCRIPTS -->
     
     <!-- edited by ramdan -->
+    <style media="screen">
+        select.ui-datepicker-month option, select.ui-datepicker-year option{
+            color: black;
+        }
+    </style>
     <script src="..\node_modules\jquery\dist\jquery.min.js" charset="utf-8"></script>
     <script src="../node_modules/jquery-ui/jquery-ui.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="..\node_modules\jquery-ui\jquery-ui.min.css">
@@ -68,6 +73,17 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
             event.preventDefault();
             var url = "<?php echo "http://$_SERVER[SERVER_NAME]$_SERVER[PHP_SELF]?menu=penelitian&"; ?>" + $(this).serialize();
             location.href = url;
+        });
+        
+        $("#realisasi_output_penelitian").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        })
+        
+        $("#button_cetak").click(function(event) {
+            location.href = "cetak.php?" + $("#form11").serialize();
         });
         
         $("#form_filter_form_pengembangan").submit(function(event){
@@ -87,24 +103,44 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
     		});
     	});
         
-        var canvas_tahun = "";
-        var canvas_jumlah = "";
+        var canvas_tahun = [];
+        var canvas_jumlah = [];
+        var canvas_tahun_pengembangan = [];
+        var canvas_jumlah_pengembangan = [];
         $("#form11").submit(function(event){
 			event.preventDefault();
 		
-		var data = $(this).serialize();
 		
+            var data = $(this).serialize();
+        // untuk mengambil data pengembangan 
 			$.ajax({
 				url: "chart_server.php",
 				data: data,
 				success: function(response){
-					$.each(response, function(index, val) {
-						canvas_tahun.push(val.tahun);
-						canvas_jumlah.push(val.jumlah);
-					});
+                    
+                    if(response == "null")
+                    {
+                        alert("Tidak ditemukan data chart");
+                    }else {
+                        var response = $.parseJSON(response)
+                        canvas_tahun = [];
+                        canvas_jumlah = [];
+                        canvas_tahun_pengembangan = [];
+                        canvas_jumlah_pengembangan = [];
+                        
+                        $.each(response.penelitian, function(index, val) {
+                            canvas_tahun.push(val.tahun);
+                            canvas_jumlah.push(val.jumlah);
+                        });
+                        
+                        $.each(response.pengembangan, function(index, val) {
+                            canvas_tahun_pengembangan.push(val.tahun);
+                            canvas_jumlah_pengembangan.push(val.jumlah);
+                        });
+                    }
 				}
 			})
-		})
+
 		
 		var canvas_data = new Chart($("#canvas_penelitian"), {
 			type: 'bar',
@@ -119,7 +155,25 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
 		                'rgba(255, 206, 86, 0.2)',
 		                'rgba(75, 192, 192, 0.2)',
 		                'rgba(153, 102, 255, 0.2)',
-		                'rgba(255, 159, 64, 0.2)'
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
 		            ],
 		            borderColor: [
 		                'rgba(255,99,132,1)',
@@ -127,7 +181,25 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
 		                'rgba(255, 206, 86, 1)',
 		                'rgba(75, 192, 192, 1)',
 		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
 		            ],
 		            borderWidth: 1
 		        }]
@@ -142,8 +214,82 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
 		        }
 		    }
 		})
+		
+		var canvas_data_pengembangan = new Chart($("#canvas_pengembangan"), {
+			type: 'bar',
+		    data: {
+		        labels: canvas_tahun_pengembangan,
+		        datasets: [{
+		            label: '# Jumlah uang',
+		            data: canvas_jumlah_pengembangan,
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+		        }
+		    }
+		})
+	})
 	
-    })
+})
     </script>
     <!-- end edited by ramdan -->
 </body>

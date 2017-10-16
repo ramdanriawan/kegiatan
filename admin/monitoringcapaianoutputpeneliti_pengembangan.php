@@ -7,7 +7,7 @@
 <div align="center"><span class="style1">Monitoring Capaian Output Penelitian dan Pengembangan</span><br /><br />
 </div>
 <div align="center">
-<form id="form11" name="form1" method="post" action="" target="">
+<form id="form11" name="form1" method="post" action="cetak.php" target="_blank" enctype="application/x-www-form-urlencoded">
   <select name="tgl1" id="tgl1">
 <option>	01	</option>
 <option>	02	</option>
@@ -117,13 +117,25 @@ S.d
 </option>
 <?php } ?>
 </select>
-<input type="submit" name="Submit" value="Cetak" class="btn btn-primary "/>
+<button  id="button_cetak" type="button" name="Submit" value="Cetak" class="btn btn-primary ">Cetak</button>
+<button  type="submit" name="Submit" value="Lihat Grafik" class="btn btn-info">Lihat Grafik</button>
 </form>
+	<!-- code added by ramdan --> 
+	<div class="row">
+		<h3>Penelitian</h3>
+		<div style="height: 500px; width:1000px;">
+			<canvas id="canvas_penelitian" height="500" width="1000">Tekan tombol cetak untuk menampilkan grafik</canvas>
+		</div>
+	</div>
+	
+	<p>
+		
+	<div class="row">
+		<h3>Pengembangan</h3>
+		<div style="height: 500px; width:1000px;">
+			<canvas id="canvas_pengembangan" height="500" width="1000">Tekan tombol cetak untuk menampilkan grafik</canvas>
+		</div>
+	</div>
+	<!-- end code edited -->
 </div>
 
-<!-- code added by ramdan --> 
-<div class="row">
-	<div class="col-md-6 col-md-offset-3" style="height: 500px;">
-		<canvas id="canvas_penelitian" style="width: 100%; height: 500px;">Tekan tombol cetak untuk menampilkan grafik</canvas>
-	</div>
-</div>

@@ -5,7 +5,7 @@ include_once("tglindo.php");
 #untuk paging (pembagian halamanan)
 $row = 20;
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0;
-$pageSql = "SELECT * FROM kas";
+$pageSql = "SELECT * from penelitian";
 $pageQry = mysql_query($pageSql, $server) or die ("error paging: ".mysql_error());
 $jml	 = mysql_num_rows($pageQry);
 $max	 = ceil($jml/$row);
@@ -13,8 +13,8 @@ $max	 = ceil($jml/$row);
 
 <!--  edited by ramdan riawan -->
 <?php 
-$pdo = new PDO("mysql:host=localhost;dbname=kas", "root", "");
-$query_pdo = $pdo->query("select tgl from kas");
+$pdo = new PDO("mysql:host=localhost;dbname=kegiatan", "root", "");
+$query_pdo = $pdo->query("select tgl from penelitian");
 
 while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 {
@@ -37,6 +37,19 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 		</div>
 		
 		<form id="form_filter_form" class="form-inline pull-right">
+			
+			<div id="form_pertahun" class="form-group">
+				<?php if($_GET["checkbox_pertahun"] == "yes"){
+					$selected_checbox = "checked";
+				}else {
+					$selected_checbox = "";
+				} ?>
+				<label>
+					<input type="checkbox" name="checkbox_pertahun" value="yes" <?php echo $selected_checkbox; ?>>
+					Pertahun
+				</label>
+			</div>
+			
 			<div id="form_filter" class="form-group">
 				<select name="bulan_filter" id="bulan" class="form-control" >
 					<?php 
@@ -162,12 +175,18 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 				$bulan = $_GET["bulan_filter"];
 				$tahundanbulan = "$tahun-$bulan";
 				
-				if(!isset($_GET["tahun_filter"], $_GET["bulan_filter"]))
+				if(!isset($_GET["tahun_filter"], $_GET["bulan_filter"]) && !isset($_GET["filter_pertahun"]))
 				{
 					$tahundanbulan = date("Y") . "-" . date("m");
 				}
 				
-				$pasienSql = "SELECT * FROM kas where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
+				$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
+				
+				if(isset($_GET["checkbox_pertahun"]) && isset($_GET["tahun_filter"]))
+				{
+					$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$_GET[tahun_filter]%' ORDER BY kode DESC LIMIT $hal, $row";
+				}
+				
 				$pasienQry = mysql_query($pasienSql, $server)  or die ("Query pasien salah : ".mysql_error());
 				$nomor  = 0; 
 				while ($pasien = mysql_fetch_array($pasienQry)) {
