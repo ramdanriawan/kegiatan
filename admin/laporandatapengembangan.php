@@ -3,9 +3,9 @@
 	<div class="col-md-6 col-md-offset-3">
 		<form class="form-inline" action="cetakpertanggal_pengembangan.php" method="post">
 			<fieldset>
-				<legend style="margin-bottom: -10px">Cetak Perhari</legend>
+				<legend style="margin-bottom: -5px"> Cetak Perhari</legend>
 				<div class="form-group">
-					<input type="date" name="bulan_mulai">
+					<input class="cetak_laporan_pengembangan_perhari" type="text" name="hari_mulai">
 				</div>
 
 				<div class="form-group">
@@ -24,13 +24,15 @@
 	</div>
 </div>
 
+<p>
+
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<form class="form-inline" action="cetakpertanggal_pengembangan.php" method="post">
 			<fieldset>
-				<legend>Cetak Perbulan</legend>
+				<legend style="margin-bottom: -5px"> Cetak Perbulan </legend>
 				<div class="form-group">
-					<input type="month" name="bulan_mulai">
+					<input  class="cetak_laporan_pengembangan_perbulan" type="text" name="bulan_mulai">
 				</div>
 
 				<div class="form-group">
@@ -38,7 +40,7 @@
 				</div>
 				
 				<div class="form-group">
-					<input type="month" name="bulan_akhir">
+					<input  class="cetak_laporan_pengembangan_perbulan" type="text" name="bulan_akhir">
 				</div>
 
 				<div class="form-group">
@@ -57,13 +59,15 @@
 	</div>
 </div>
 
+<p>
+
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<form class="form-inline" action="cetakpertanggal_pengembangan.php" method="post">
 			<fieldset>
-				<legend>Cetak Pertahun</legend>
+				<legend style="margin-bottom: -5px"> Cetak Pertahun </legend>
 				<div class="form-group">
-					<input type="year" name="year_mulai">
+					<input  class="cetak_laporan_pengembangan_pertahun" data-date-format="yy-mm-dd" type="text" name="year_mulai">
 				</div>
 
 				<div class="form-group">
@@ -71,7 +75,7 @@
 				</div>
 
 				<div class="form-group">
-					<input type="year" name="year_akhir">
+					<input  class="cetak_laporan_pengembangan_pertahun" type="text" name="year_akhir">
 				</div>
 
 				<div class="form-group">

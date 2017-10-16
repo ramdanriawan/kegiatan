@@ -82,6 +82,27 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
             monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
         })
         
+        $(".cetak_laporan_pengembangan_perhari").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        });
+        
+        $(".cetak_laporan_pengembangan_perbulan").datepicker({
+            dateFormat: "yy-mm",
+            changeMonth: true,
+            changeYear: true,
+            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        });
+        
+        $(".cetak_laporan_pengembangan_pertahun").datepicker({
+            dateFormat: "yy",
+            changeMonth: true,
+            changeYear: true,
+            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        });
+        
         $("#button_cetak").click(function(event) {
             open("cetak.php?" + $("#form11").serialize(), "_blank");
         });
@@ -240,7 +261,7 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
 		            borderWidth: 1
 		        },
 		        {
-		            label: '# Jumlah uang',
+		            label: '# Jumlah uang pengembangan',
 		            data: canvas_jumlah_pengembangan,
 		            backgroundColor: [
 		                'rgba(255, 100, 55, 0.2)',

@@ -1,4 +1,5 @@
 <?php 
+echo $_GET["media"];
 
 include "../library/koneksi.php";
 include "fungsi.php";
@@ -6,21 +7,18 @@ include_once("tglindo.php");
 ?>
 <?php 
 
-
 $tgl=date('Y-m-d');
-$tglorder=$_POST['tanggal'];
+$tglorder=$_GET['tanggal'];
 $sql=mysql_query("select * from penelitian
-where tgl like '$_POST[tanggal]%' and jenis='masuk' order by kode asc") or die
+where tgl like '$_GET[tanggal]%' and jenis='masuk' order by kode asc") or die
 (mysql_error());
 ?>
     
 
 <style type="text/css">
-<!--
 .style1 {font-size: 18px}
--->
 </style>
-<body onLoad="javascript:print()">   
+<body onLoad="">   
                             <table width="100%">
 							<tr>
 							<td><div align="center">
@@ -28,11 +26,11 @@ where tgl like '$_POST[tanggal]%' and jenis='masuk' order by kode asc") or die
 							</tr>
 							</table>
                         </div>
-						<form name="sda" role="form" method="post">
+						<form name="sda" role="form" method="GET">
                         <div class="panel-body">
 						 <div class="col-lg-12">
                         	<div class="row">
-							<CenteR>Laporan Penelitian :  <?php echo TanggalIndo($_POST["tanggal"]);?>
+							<CenteR>Laporan Penelitian :  <?php echo TanggalIndo($_GET["tanggal"]);?>
 							</center>
 										<br>
 										   <div class="dataTable_wrapper">
