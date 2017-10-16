@@ -120,22 +120,16 @@ S.d
 <button  id="button_cetak" type="button" name="Submit" value="Cetak" class="btn btn-primary ">Cetak</button>
 <button  type="submit" name="Submit" value="Lihat Grafik" class="btn btn-info">Lihat Grafik</button>
 </form>
+<p>
+	
 	<!-- code added by ramdan --> 
 	<div class="row">
-		<h3>Penelitian</h3>
 		<div style="height: 500px; width:1000px;">
 			<canvas id="canvas_penelitian" height="500" width="1000">Tekan tombol cetak untuk menampilkan grafik</canvas>
 		</div>
 	</div>
 	
 	<p>
-		
-	<div class="row">
-		<h3>Pengembangan</h3>
-		<div style="height: 500px; width:1000px;">
-			<canvas id="canvas_pengembangan" height="500" width="1000">Tekan tombol cetak untuk menampilkan grafik</canvas>
-		</div>
-	</div>
 	<!-- end code edited -->
 </div>
 
