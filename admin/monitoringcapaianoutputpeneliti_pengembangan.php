@@ -3,8 +3,8 @@
 	<br /><br />
 </div>
 
-<div class="col-md-6 col-md-offset-3">
-	<form id="form11" name="form1" method="post" action="cetak.php" target="_blank" enctype="application/x-www-form-urlencoded">
+<div class="col-md-12">
+	<form id="form11" class="form-inline" name="form1" method="post" action="cetak.php" target="_blank" enctype="application/x-www-form-urlencoded">
   		<select class="form-control" name="tgl1" id="tgl1">
 			<option>01</option>
 			<option>02</option>
@@ -57,7 +57,7 @@
 		<select class="form-control" name="thn1" id="thn1">
 
 		<?php 
-			$tahun_terakhir = date("Y") - 5;
+			$tahun_terakhir = date("Y") - 4;
 			$tahun_sekarang = date("Y");
 			
 			for ($i=$tahun_terakhir; $i <= $tahun_sekarang; $i++)
@@ -119,7 +119,7 @@
 		
 		<select class="form-control" name="thn2" id="select3">
 			<?php 
-				$tahun_terakhir = date("Y") - 5;
+				$tahun_terakhir = date("Y") - 4;
 				$tahun_sekarang = date("Y");
 				
 				for ($i=$tahun_terakhir; $i <= $tahun_sekarang; $i++)
