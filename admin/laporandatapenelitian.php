@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<form class="form-inline" action="cetakpertanggal_pengembangan.php" method="post">
+		<form class="form-inline" action="cetakpertanggal_penelitian.php" method="post">
 			<fieldset>
 				<legend style="margin-bottom: -5px"> Cetak Perhari</legend>
 				<div class="form-group">
@@ -28,7 +28,7 @@
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<form class="form-inline" action="cetakpertanggal_pengembangan.php" method="post">
+		<form class="form-inline" action="cetakpertanggal_penelitian.php" method="post">
 			<fieldset>
 				<legend style="margin-bottom: -5px"> Cetak Perbulan </legend>
 				<div class="form-group">

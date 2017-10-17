@@ -5,7 +5,7 @@ include_once("tglindo.php");
 #untuk paging (pembagian halamanan)
 $row = 20;
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0;
-$pageSql = "SELECT * from penelitian";
+$pageSql = "SELECT * from pengembangan";
 $pageQry = mysql_query($pageSql, $server) or die ("error paging: ".mysql_error());
 $jml	 = mysql_num_rows($pageQry);
 $max	 = ceil($jml/$row);
@@ -14,7 +14,7 @@ $max	 = ceil($jml/$row);
 <!--  edited by ramdan riawan -->
 <?php 
 $pdo = new PDO("mysql:host=localhost;dbname=kegiatan", "root", "");
-$query_pdo = $pdo->query("select tgl from penelitian");
+$query_pdo = $pdo->query("select tgl from pengembangan");
 
 while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 {
@@ -36,7 +36,8 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 			</button>
 		</div>
 		
-		<form id="form_filter_form_pengembangan" class="form-inline pull-right">
+		<form id="form_filter_form" class="form-inline pull-right">
+			
 			<div id="form_pertahun" class="form-group">
 				<?php if($_GET["checkbox_pertahun"] == "yes"){
 					$selected_checbox = "checked";
@@ -137,7 +138,7 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 			</div>
 			
 			<div class="form-group">
-				<button  id="form_filter_button_pengembangan" class="btn btn-primary" type="submit" name="button">
+				<button  id="form_filter_button" class="btn btn-primary" type="submit" name="button">
 					Filter 
 					<span class="icon icon-filter"></span>
 				</button>
@@ -145,12 +146,13 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 		</form>
 	</div>
 </div>
-<p>
-<!--  end edited by ramdan -->
 
+<!--  end edited by ramdan -->
+<p>
+	
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h4 class="panel-title">Pengembangan</h4>
+		<h4 class="panel-title">Penelitian</h4>
 	</div>
 	<div class="panel-body">
 		<div id="laporan_data" class="table-responsive">
@@ -173,36 +175,36 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 				$bulan = $_GET["bulan_filter"];
 				$tahundanbulan = "$tahun-$bulan";
 				
-				if(!isset($_GET["tahun_filter"], $_GET["bulan_filter"]))
+				if(!isset($_GET["tahun_filter"], $_GET["bulan_filter"]) && !isset($_GET["filter_pertahun"]))
 				{
 					$tahundanbulan = date("Y") . "-" . date("m");
 				}
 				
-				$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
+				$kegiatanSql = "SELECT * from pengembangan where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
 				
 				if(isset($_GET["checkbox_pertahun"]) && isset($_GET["tahun_filter"]))
 				{
-					$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$_GET[tahun_filter]%' ORDER BY kode DESC LIMIT $hal, $row";
+					$kegiatanSql = "SELECT * from pengembangan where jenis='Masuk' AND tgl LIKE '%$_GET[tahun_filter]%' ORDER BY kode DESC LIMIT $hal, $row";
 				}
 				
-				$pasienQry = mysql_query($pasienSql, $server)  or die ("Query pasien salah : ".mysql_error());
+				$kegiatanQry = mysql_query($kegiatanSql, $server)  or die ("Query pasien salah : ".mysql_error());
 				$nomor  = 0; 
-				while ($pasien = mysql_fetch_array($pasienQry)) {
+				while ($kegiatan = mysql_fetch_array($kegiatanQry)) {
 				$nomor++;
 			?>
 				<tbody>
 					<tr>
 						<td><?php echo $nomor;?></td>
-						<td><?php echo $pasien['kode'];?></td>
-						<td><?php echo $pasien['ma'];?></td>
-						<td><?php echo $pasien['keterangan'];?></td>
-						<td><?php echo TanggalIndo($pasien['tgl']);?></td>
-						<td><!--isi datanya disini yang kurang--></td>
-						<td>Rp.<?php echo number_format($pasien['jumlah']) ?>,-</td>
+						<td><?php echo $kegiatan['kode'];?></td>
+						<td><?php echo $kegiatan['ma'];?></td>
+						<td><?php echo $kegiatan['keterangan'];?></td>
+						<td><?php echo TanggalIndo($kegiatan['tgl']);?></td>
+						<td>Rp.<?php echo number_format($kegiatan['jumlah']) ?>,-</td>
+						<td><?php echo $kegiatan['persentase'];?></td>
 						<td>
 						  <div class='btn-group'>
-						  <a href="?menu=hapus_pengembangan&aksi=hapus&nmr=<?php echo $pasien['kode']; ?>" class="btn btn-xs btn-danger tipsy-kiri-atas" title="Hapus Data Ini" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA PENTING INI ... ?')"><i class="icon-remove icon-white"></i></a> 
-						  <a href="?menu=edit_pengembangan&aksi=edit&nmr=<?php echo $pasien['kode']; ?>" class="btn btn-xs btn-info tipsy-kiri-atas" title='Edit Data ini'> <i class="icon-edit icon-white"></i> </a>
+						  <a href="?menu=hapus_penelitian&aksi=hapus&nmr=<?php echo $kegiatan['kode']; ?>" class="btn btn-xs btn-danger tipsy-kiri-atas" title="Hapus Data Ini" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA PENTING INI ... ?')"><i class="icon-remove icon-white"></i></a> 
+						  <a href="?menu=edit_penelitian&aksi=edit&nmr=<?php echo $kegiatan['kode']; ?>" class="btn btn-xs btn-info tipsy-kiri-atas" title='Edit Data ini'> <i class="icon-edit icon-white"></i> </a>
 						  </div>
 						</td>
 					</tr>
@@ -213,7 +215,7 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 						<?php
 						for($h = 1; $h <= $max; $h++){
 							$list[$h] = $row*$h-$row;
-							echo "<ul class='pagination pagination-sm'><li><a href='?menu=kas_pengembangan&hal=$list[$h]'>$h</a></li></ul>";
+							echo "<ul class='pagination pagination-sm'><li><a href='?menu=kas_penelitian&hal=$list[$h]'>$h</a></li></ul>";
 						}
 						?></td>
 					</tr>

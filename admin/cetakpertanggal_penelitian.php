@@ -47,6 +47,7 @@ echo <<<EOD
                     <table width="100%" border="1" class='table table-bordered table-striped'>
                         <thead>
                             <tr>
+                                <th bgcolor="#CCCCCC">No#</th>
                                 <th bgcolor="#CCCCCC">Judul Pengembangan</th>
                                 <th bgcolor="#CCCCCC">Target Capaian Outpu</th>
                                 <th bgcolor="#CCCCCC">Persentase Target Capaian Output</th>
@@ -73,6 +74,7 @@ foreach ($data_hari as $key => $value){
                                 <td>$value->ma</td>
                                 <td>$tgl</td>
                                 <td>$value->keterangan</td>
+                                <td>{$value->persentase}%</td>
                                 <td>$keluar,-</td>
                             </tr>
                         ";
@@ -80,7 +82,7 @@ foreach ($data_hari as $key => $value){
                         $total = number_format($total);
                         echo "
                             <tr>
-                                <th colspan=5>Total Keseluruhaan</th>
+                                <th colspan=6>Total Keseluruhaan</th>
                                 <Td>Rp.$total,-</td>
                             </tr>
                         </tbody>

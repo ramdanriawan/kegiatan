@@ -79,7 +79,7 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
-            yearRange: "-5:+0",
+            yearRange: "-4:+0",
             monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
         })
         
@@ -87,7 +87,7 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            yearRange: "-5:+0",
+            yearRange: "-4:+0",
             monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
         });
         

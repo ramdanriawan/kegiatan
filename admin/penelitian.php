@@ -180,31 +180,31 @@ while($row_pdo = $query_pdo->fetch(PDO::FETCH_OBJ))
 					$tahundanbulan = date("Y") . "-" . date("m");
 				}
 				
-				$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
+				$kegiatanSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$tahundanbulan%' ORDER BY kode DESC LIMIT $hal, $row";
 				
 				if(isset($_GET["checkbox_pertahun"]) && isset($_GET["tahun_filter"]))
 				{
-					$pasienSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$_GET[tahun_filter]%' ORDER BY kode DESC LIMIT $hal, $row";
+					$kegiatanSql = "SELECT * from penelitian where jenis='Masuk' AND tgl LIKE '%$_GET[tahun_filter]%' ORDER BY kode DESC LIMIT $hal, $row";
 				}
 				
-				$pasienQry = mysql_query($pasienSql, $server)  or die ("Query pasien salah : ".mysql_error());
+				$kegiatanQry = mysql_query($kegiatanSql, $server)  or die ("Query pasien salah : ".mysql_error());
 				$nomor  = 0; 
-				while ($pasien = mysql_fetch_array($pasienQry)) {
+				while ($kegiatan = mysql_fetch_array($kegiatanQry)) {
 				$nomor++;
 			?>
 				<tbody>
 					<tr>
 						<td><?php echo $nomor;?></td>
-						<td><?php echo $pasien['kode'];?></td>
-						<td><?php echo $pasien['ma'];?></td>
-						<td><?php echo $pasien['keterangan'];?></td>
-						<td><?php echo TanggalIndo($pasien['tgl']);?></td>
-						<td>Rp.<?php echo number_format($pasien['jumlah']) ?>,-</td>
-						<td> <!--isi data--></td>
+						<td><?php echo $kegiatan['kode'];?></td>
+						<td><?php echo $kegiatan['ma'];?></td>
+						<td><?php echo $kegiatan['keterangan'];?></td>
+						<td><?php echo TanggalIndo($kegiatan['tgl']);?></td>
+						<td>Rp.<?php echo number_format($kegiatan['jumlah']) ?>,-</td>
+						<td><?php echo $kegiatan['persentase'];?></td>
 						<td>
 						  <div class='btn-group'>
-						  <a href="?menu=hapus_penelitian&aksi=hapus&nmr=<?php echo $pasien['kode']; ?>" class="btn btn-xs btn-danger tipsy-kiri-atas" title="Hapus Data Ini" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA PENTING INI ... ?')"><i class="icon-remove icon-white"></i></a> 
-						  <a href="?menu=edit_penelitian&aksi=edit&nmr=<?php echo $pasien['kode']; ?>" class="btn btn-xs btn-info tipsy-kiri-atas" title='Edit Data ini'> <i class="icon-edit icon-white"></i> </a>
+						  <a href="?menu=hapus_penelitian&aksi=hapus&nmr=<?php echo $kegiatan['kode']; ?>" class="btn btn-xs btn-danger tipsy-kiri-atas" title="Hapus Data Ini" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA PENTING INI ... ?')"><i class="icon-remove icon-white"></i></a> 
+						  <a href="?menu=edit_penelitian&aksi=edit&nmr=<?php echo $kegiatan['kode']; ?>" class="btn btn-xs btn-info tipsy-kiri-atas" title='Edit Data ini'> <i class="icon-edit icon-white"></i> </a>
 						  </div>
 						</td>
 					</tr>
