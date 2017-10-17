@@ -56,7 +56,7 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
     
     <!-- edited by ramdan -->
     <style media="screen">
-        select.ui-datepicker-month option, select.ui-datepicker-year option{
+        select.ui-datepicker-month option, select.ui-datepicker-year option, select.ui-datepicker-month option:checked, select.ui-datepicker-month option:checked{
             color: black;
         }
     </style>
@@ -79,27 +79,15 @@ if($_SESSION["user"]!="" && $_SESSION["pass"]!=""){
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
+            yearRange: "-5:+0",
             monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
         })
         
-        $(".cetak_laporan_pengembangan_perhari").datepicker({
+        $(".cetak_laporan_data").datepicker({
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
-        });
-        
-        $(".cetak_laporan_pengembangan_perbulan").datepicker({
-            dateFormat: "yy-mm",
-            changeMonth: true,
-            changeYear: true,
-            monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
-        });
-        
-        $(".cetak_laporan_pengembangan_pertahun").datepicker({
-            dateFormat: "yy",
-            changeMonth: true,
-            changeYear: true,
+            yearRange: "-5:+0",
             monthNamesShort: ["January", "February", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
         });
         

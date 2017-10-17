@@ -1,4 +1,4 @@
-<?php session_start();
+<?php session_start(); error_reporting(0);
 include "../library/koneksi.php";
 include "fungsi.php";
 include_once("tglindo.php");
@@ -6,10 +6,15 @@ include_once("tglindo.php");
 <?php 
 // code added by ramdan
 $pdo = new PDO("mysql:host=localhost;dbname=kegiatan", "root", "");
+$query = $pdo->query("select * from pengembangan where tgl like '%$_POST[hari_mulai]%'");
 
-    if($_POST["media"] == "perhari")
+if($query->rowCount() < 1)
+{
+    die("Data yang diminta tidak ditemukan");
+}
+
+    if(isset($_POST["media"]))
     {
-        $query = $pdo->query("select * from pengembangan where tgl like '%$_POST[hari_mulai]%'");
         
         while($row = $query->fetch(PDO::FETCH_OBJ))
         {
@@ -104,4 +109,4 @@ foreach ($data_hari as $key => $value){
 // (mysql_error());
 ?>
 
-<body onload="javascript:print()"></body>
+<!-- <body onload="javascript:print()"></body> -->
